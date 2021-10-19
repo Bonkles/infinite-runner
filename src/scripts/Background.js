@@ -6,15 +6,20 @@ export class Background {
     constructor() {
         this.container = new PIXI.Container();
         this.sprites = [];
-        this.createSprite();
-        this.speed = .2;
+        this.createSprites();
+        this.speed = 5;
     }
 
-    createSprite() {
+    createSprites() {
+        for (let i = 0; i < 3; i++){
+            this.createSprite(i);
+        }
+    }
+
+    createSprite(i) {
         const sprite = new PIXI.Sprite(Globals.resources["bg"].texture);
-        sprite.x = 0;
+        sprite.x = sprite.width * i;
         sprite.y = 0;
-        sprite.anchor.set(0);
 
         this.container.addChild(sprite);
         this.sprites.push(sprite);
@@ -22,7 +27,6 @@ export class Background {
 
     update(dt) {
         const offset = this.speed * dt;
-
         this.sprites.forEach(sprite => {
             this.move(sprite, offset);
         });
