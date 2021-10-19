@@ -33,6 +33,11 @@ export class Background {
     }
 
     move(sprite, offset) {
+        const spriteRightX = sprite.x + sprite.width;
+
+        if (spriteRightX < 0) {
+            sprite.x += sprite.width * this.sprites.length
+        }
         sprite.x -= offset;
     }
 }
