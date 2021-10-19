@@ -5,7 +5,9 @@ export class Background {
 
     constructor() {
         this.container = new PIXI.Container();
+        this.sprites = [];
         this.createSprite();
+        this.speed = .2;
     }
 
     createSprite() {
@@ -15,5 +17,18 @@ export class Background {
         sprite.anchor.set(0);
 
         this.container.addChild(sprite);
+        this.sprites.push(sprite);
+    }
+
+    update(dt) {
+        const offset = this.speed * dt;
+
+        this.sprites.forEach(sprite => {
+            this.move(sprite, offset);
+        });
+    }
+
+    move(sprite, offset) {
+        sprite.x -= offset;
     }
 }
