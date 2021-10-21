@@ -8,8 +8,18 @@ export class Platform {
     constructor(rows, cols, x) {
         this.rows = rows;
         this.cols = cols;
+        this.width = this.cols * TILESIZE;
+        this.height = this.rows * TILESIZE;
         this.createContainer(x);
         this.createTiles();
+    }
+
+    get left() {
+        return this.container.x;
+    }
+
+    get right() {
+        return this.left + this.width;
     }
 
     createContainer(x) {
