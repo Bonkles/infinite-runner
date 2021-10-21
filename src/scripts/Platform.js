@@ -12,6 +12,8 @@ export class Platform {
         this.height = this.rows * TILESIZE;
         this.createContainer(x);
         this.createTiles();
+        this.speed = 10;
+
     }
 
     get left() {
@@ -33,6 +35,15 @@ export class Platform {
             for (let col = 0; col < this.cols; col++) {
                 this.createTile(row, col);
             }
+        }
+    }
+
+
+    move() {
+        this.container.x -= this.speed;
+
+        if (this.right < 0) {
+            this.container.emit("hidden");
         }
     }
 

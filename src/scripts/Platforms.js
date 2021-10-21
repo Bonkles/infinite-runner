@@ -5,7 +5,6 @@ export class Platforms {
     constructor() {
         this.platforms = [];
         this.container = new PIXI.Container();
-        this.speed = 6;
 
         this.ranges = {
             rows: {
@@ -48,8 +47,11 @@ export class Platforms {
         this.container.addChild(platform.container);
         this.platforms.push(platform);
         this.current = platform;
-    }
 
+        platform.container.once("hidden", () => {
+            this.platforms = this.platforms.filter (curPlatform => platform != curPlatform)
+        });
+    }
 
     update(dt) {
         const offset = this.speed * dt;
@@ -57,6 +59,11 @@ export class Platforms {
         if (this.current.right < window.innerWidth) {
             this.createPlatform(this.randomPlatformData)
         }
+
+        this.platforms.forEach(platform => {
+            platform.move(platform, offset);
+        });
+
     }
 
 }
