@@ -24,6 +24,31 @@ export class Platform {
         return this.left + this.width;
     }
 
+    get top() {
+        return this.container.y
+    }
+
+    get bottom() {
+        return this.top + this.height;
+    }
+
+    checkCollision(hero) {
+        if (this.collideTop(hero)) {
+            hero.stayOnPlatform(this);
+        } else {
+            if (hero.platform === this) {
+                hero.platform = null;
+            }
+        }
+    }
+
+    collideTop(hero) {
+        return (hero.right >= this.left &&
+        hero.left <= this.right &&
+        hero.bottom <= this.top &&
+        hero.nextBottom >= this.top )
+    }
+
     createContainer(x) {
         this.container = new PIXI.Container();
         this.container.x = x;

@@ -29,6 +29,8 @@ export class MainScene {
 
     update(dt) {
         this.bg.update(dt);
+        this.platforms.checkCollisions(this.hero);
         this.platforms.update(dt);
+        this.hero.update(dt);
     }
 }

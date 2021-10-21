@@ -1,6 +1,6 @@
 import * as PIXI from "pixi.js";
 import { Platform } from './Platform';
-
+import { Hero } from './Hero';
 export class Platforms {
     constructor() {
         this.platforms = [];
@@ -64,6 +64,12 @@ export class Platforms {
             platform.move(platform, offset);
         });
 
+    }
+
+    checkCollisions(hero) {
+        this.platforms.forEach(platform => {
+            platform.checkCollision(hero);
+        })
     }
 
 }
