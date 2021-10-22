@@ -17,6 +17,7 @@ export class Hero {
         this.container.addChild(this.sprite);
         this.dy = 0;
         this.platform = null;
+        this.jumpIndex = 0;
     }
 
 
@@ -28,6 +29,7 @@ export class Hero {
     }
 
     stayOnPlatform(platform) {
+        this.jumpIndex = 0;
         this.platform = platform;
         this.dy = 0;
         this.sprite.y = platform.top - this.sprite.height;
@@ -36,6 +38,14 @@ export class Hero {
     moveByPlatform(platform) {
         this.sprite.x = platform.nextleft - this.sprite.width;
 
+    }
+
+    startJump() {
+        if (this.platform || this.jumpIndex === 1) {
+            this.jumpIndex++;
+            this.platform = null;
+            this.dy = -18;
+        }
     }
     get bottom() {
         this.sprite.y + this.sprite.height;
