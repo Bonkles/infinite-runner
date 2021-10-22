@@ -33,6 +33,10 @@ export class Hero {
         this.sprite.y = platform.top - this.sprite.height;
     }
 
+    moveByPlatform(platform) {
+        this.sprite.x = platform.nextleft - this.sprite.width;
+
+    }
     get bottom() {
         this.sprite.y + this.sprite.height;
     }

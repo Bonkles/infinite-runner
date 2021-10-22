@@ -20,6 +20,10 @@ export class Platform {
         return this.container.x;
     }
 
+    get nextleft() {
+        return this.left - this.speed;
+    }
+
     get right() {
         return this.left + this.width;
     }
@@ -35,6 +39,8 @@ export class Platform {
     checkCollision(hero) {
         if (this.collideTop(hero)) {
             hero.stayOnPlatform(this);
+        } else if (this.collideLeft(hero)) {
+            hero.moveByPlatform(this)
         } else {
             if (hero.platform === this) {
                 hero.platform = null;
@@ -47,6 +53,12 @@ export class Platform {
         hero.left <= this.right &&
         hero.bottom <= this.top &&
         hero.nextBottom >= this.top )
+    }
+
+    collideLeft(hero) {
+        return (hero.right <= this.left &&
+            hero.right >= this.nextleft &&
+            hero.bottom >= this.top && hero.top <= this.bottom)
     }
 
     createContainer(x) {
